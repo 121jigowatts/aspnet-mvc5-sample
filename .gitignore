@@ -243,3 +243,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/aspnet-mvc5-sample/Properties/PublishProfiles/c1.pubxml

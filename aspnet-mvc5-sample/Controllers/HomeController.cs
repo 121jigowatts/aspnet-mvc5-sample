@@ -38,12 +38,19 @@ namespace aspnet_mvc5_sample.Controllers
         [HttpPost]
         public ActionResult Upload(UserData inputModel)
         {
-            var destinationFolder = Server.MapPath("/Users");
+            var destinationFolder = Server.MapPath("~/Users");
+
+            if (!Directory.Exists(destinationFolder))
+            {
+                Directory.CreateDirectory(destinationFolder);
+            }
+
             var postedFile = inputModel.Picture;
             if (postedFile.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(postedFile.FileName);
                 var path = Path.Combine(destinationFolder, fileName);
+
                 postedFile.SaveAs(path);
             }
 
@@ -53,7 +60,7 @@ namespace aspnet_mvc5_sample.Controllers
         [HttpGet]
         public ActionResult FileIndex()
         {
-            var destinationFolder = Server.MapPath("/Users");
+            var destinationFolder = Server.MapPath("~/Users");
             string[] files = Directory.GetFiles(destinationFolder, "*", SearchOption.AllDirectories);
             ViewBag.files = files;
 
