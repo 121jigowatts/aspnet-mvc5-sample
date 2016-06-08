@@ -1,0 +1,91 @@
+﻿@model aspnet_mvc5_sample.Models.Person
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Person</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+@section scripts{
+    <script>
+        $(function () {
+            $('#Birthday').datepicker();
+
+            $('#Name').autocomplete({
+                source: function (request, response) {
+                    var param = { name: $('#Name').val() };
+
+                    $.ajax({
+                        url: '@Url.Content("~/Home/AutoComplete")',
+                        data: JSON.stringify(param),
+                        datatype: "json",
+                        type: "POST",
+                        contentType: "application/json",
+                        dataFilter: function (data, type) { return data },
+                        success: function (data, dataType) {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: "ID:" + item.Id + " Name:" + item.Name + " Email:" + item.Email + " Birthday:" + item.Birthday,
+                                    value: item.Name,
+                                    extend: item
+                                };
+                            }));
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert('error');
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    $('#Email').val(ui.item.extend.Email);
+                    $('#Birthday').val(ui.item.extend.Birthday);
+
+                }
+            });
+        });
+    </script>
+}
+

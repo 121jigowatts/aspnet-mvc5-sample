@@ -1,4 +1,6 @@
 ﻿using aspnet_mvc5_sample.Models;
+using aspnet_mvc5_sample.Services.Abstractions;
+using aspnet_mvc5_sample.Services.Home;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,6 +12,16 @@ namespace aspnet_mvc5_sample.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IHomeService _service;
+        public HomeController() : this(new HomeService())
+        {
+        }
+
+        public HomeController(IHomeService service)
+        {
+            this._service = service;
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -65,6 +77,19 @@ namespace aspnet_mvc5_sample.Controllers
             ViewBag.files = files;
 
             return View();
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+
+
+        public JsonResult AutoComplete(String name)
+        {
+            var data = _service.GetPeopleByName(name);
+            return Json(data);
         }
 
 
