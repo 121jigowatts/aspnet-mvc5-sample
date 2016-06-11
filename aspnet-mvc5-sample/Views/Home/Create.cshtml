@@ -58,31 +58,23 @@
                 source: function (request, response) {
                     var param = { name: $('#Name').val() };
 
-                    $.ajax({
-                        url: '@Url.Content("~/Home/AutoComplete")',
-                        data: JSON.stringify(param),
-                        datatype: "json",
-                        type: "POST",
-                        contentType: "application/json",
-                        dataFilter: function (data, type) { return data },
-                        success: function (data, dataType) {
-                            response($.map(data, function (item) {
-                                return {
-                                    label: "ID:" + item.Id + " Name:" + item.Name + " Email:" + item.Email + " Birthday:" + item.Birthday,
-                                    value: item.Name,
-                                    extend: item
-                                };
-                            }));
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            alert('error');
-                        }
+                    $.getJSON('@Url.Content("~/api/people")', param)
+                    .done(function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: "ID:" + item.Id + " Name:" + item.Name + " Email:" + item.Email + " Birthday:" + item.Birthday,
+                                value: item.Name,
+                                extend: item
+                            };
+                        }));
+                    })
+                    .fail(function (jqXHR, textStatus, err) {
+                        alert('error : ' + err);
                     });
                 },
                 select: function (event, ui) {
                     $('#Email').val(ui.item.extend.Email);
                     $('#Birthday').val(ui.item.extend.Birthday);
-
                 }
             });
         });
