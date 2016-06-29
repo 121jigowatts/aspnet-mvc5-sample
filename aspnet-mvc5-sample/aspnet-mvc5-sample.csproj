@@ -45,6 +45,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -185,20 +189,35 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Api\PeopleController.cs" />
+    <Compile Include="Controllers\ToDoController.cs" />
+    <Compile Include="Data\AppDbContext.cs" />
+    <Compile Include="Framework\ILogger.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606270340310_InitialCreate.cs" />
+    <Compile Include="Migrations\201606270340310_InitialCreate.Designer.cs">
+      <DependentUpon>201606270340310_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Item.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\UserData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Abstractions\IItemRepository.cs" />
+    <Compile Include="Repositories\ItemRepository.cs" />
     <Compile Include="Services\Abstractions\IHomeService.cs" />
     <Compile Include="Services\Abstractions\IPeopleService.cs" />
+    <Compile Include="Services\Abstractions\IToDoService.cs" />
     <Compile Include="Services\Home\HomeService.cs" />
     <Compile Include="Services\People\PeopleService.cs" />
+    <Compile Include="Services\ToDo\ToDoService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ToDo\ItemViewModel.cs" />
+    <Compile Include="ViewModels\ToDo\ToDoListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -305,6 +324,11 @@
     <Content Include="Views\Home\Upload.cshtml" />
     <Content Include="Views\Home\FileIndex.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\ToDo\Create.cshtml" />
+    <Content Include="Views\ToDo\Delete.cshtml" />
+    <Content Include="Views\ToDo\Details.cshtml" />
+    <Content Include="Views\ToDo\Edit.cshtml" />
+    <Content Include="Views\ToDo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -314,6 +338,11 @@
       <SubType>Designer</SubType>
     </Content>
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201606270340310_InitialCreate.resx">
+      <DependentUpon>201606270340310_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

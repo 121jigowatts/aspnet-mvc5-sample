@@ -1,0 +1,58 @@
+﻿@model aspnet_mvc5_sample.ViewModels.ToDo.ToDoListViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => Model.ToDoList.FirstOrDefault().Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.ToDoList.FirstOrDefault().Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.ToDoList.FirstOrDefault().Deadline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.ToDoList.FirstOrDefault().Completed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.ToDoList.FirstOrDefault().Expiration)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.ToDoList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deadline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Completed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Expiration)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
