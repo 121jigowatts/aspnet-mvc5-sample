@@ -21,7 +21,7 @@ namespace aspnet_mvc5_sample.ViewModels.ToDo
             this.ID = model.ID;
             this.Title = model.Title;
             this.Description = model.Description;
-            this.Deadline = model.Deadline.ToString();
+            this.Deadline = model.Deadline?.ToString("yyyy-MM-dd HH:mm:ss");
             this.Completed = model.Completed;
             this.Expiration = model.IsExpiration() ? "期限切れ" : string.Empty;
         }
