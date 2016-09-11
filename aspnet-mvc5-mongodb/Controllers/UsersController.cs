@@ -4,6 +4,7 @@ using aspnet_mvc5_mongodb.Repositories.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -58,6 +59,72 @@ namespace aspnet_mvc5_mongodb.Controllers
                 }
             }
             return View(inputModel);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Edit(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var model = await _repository.GetByIdAsync(id);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(User document)
+        {
+            if (document == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _repository.UpdateAsync(document);
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+                    ViewBag.ErrorMsg = "データ更新に失敗しました。";
+                    return View(document);
+                }
+            }
+
+            return View(document);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var model = await _repository.GetByIdAsync(id);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(model);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(string id)
+        {
+            await _repository.DeleteAsync(id);
+            return RedirectToAction("Index");
         }
     }
 }

@@ -1,9 +1,5 @@
 ﻿using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Web;
 
 namespace aspnet_mvc5_mongodb.Repositories
 {
@@ -15,8 +11,8 @@ namespace aspnet_mvc5_mongodb.Repositories
         public MongoDB()
         {
             var connectionString = ConfigurationManager.AppSettings["MongoDBConnection"];
-            _client = new MongoClient(connectionString);
             var database = ConfigurationManager.AppSettings["Database"];
+            _client = new MongoClient(connectionString);
             _database = _client.GetDatabase(database);
         }
 

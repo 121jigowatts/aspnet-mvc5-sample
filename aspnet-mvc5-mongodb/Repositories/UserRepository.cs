@@ -18,15 +18,22 @@ namespace aspnet_mvc5_mongodb.Repositories
         public async Task<IEnumerable<User>> GetAllAsync()
         {
             var collection = GetCollection<User>(Collection);
-            var filter = new BsonDocument();
-            var result = await collection.Find(filter).ToListAsync();
+            //var filter = new BsonDocument();
+            //var result = await collection.Find(filter).ToListAsync();
 
-            return result;
+            //return result;
+            return await collection.Find(_ => true).ToListAsync();
         }
 
-        public Task<User> GetByIdAsync(string id)
+        public async Task<User> GetByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            var collection = GetCollection<User>(Collection);
+            //var objId = ObjectId.Parse(id);
+            //var filter = Builders<User>.Filter.Eq("_id", objId);
+            //return await collection.Find(filter).FirstOrDefaultAsync();
+
+            return await collection.Find(d => d.Id == id).FirstOrDefaultAsync();
+
         }
 
         public async Task InsertAsync(User document)
@@ -35,14 +42,36 @@ namespace aspnet_mvc5_mongodb.Repositories
             await collection.InsertOneAsync(document);
         }
 
-        public Task UpdateAsync(User document)
+        public async Task UpdateAsync(User document)
         {
-            throw new NotImplementedException();
+            var collection = GetCollection<User>(Collection);
+            //var objId = ObjectId.Parse(document.Id);
+            //var filter = Builders<User>.Filter.Eq("_id", objId);
+            //var update = Builders<User>.Update
+            //    .Set("name", document.Name)
+            //    .Set("correct", document.Age)
+            //    .Set("incorrect_one", document.Email)
+            //    .Set("incorrect_two", document.Address);
+
+            //await collection.UpdateOneAsync(filter, update);
+
+            var update = Builders<User>.Update
+                .Set(d => d.Name, document.Name)
+                .Set(d => d.Age, document.Age)
+                .Set(d => d.Email, document.Email)
+                .Set(d => d.Address, document.Address);
+
+            await collection.UpdateOneAsync(d => d.Id == document.Id, update);
         }
 
-        public Task DeleteAsync(string id)
+        public async Task DeleteAsync(string id)
         {
-            throw new NotImplementedException();
+            var collection = GetCollection<User>(Collection);
+            //var objId = ObjectId.Parse(id);
+            //var filter = Builders<User>.Filter.Eq("_id", objId);
+            //await collection.DeleteOneAsync(filter);
+
+            await collection.DeleteOneAsync(d => d.Id == id);
         }
     }
 }
