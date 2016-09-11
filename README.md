@@ -6,3 +6,5 @@ sample collection
 - MongoDB Connection
  - Index
  - Create
+ - Edit
+ - Delete
