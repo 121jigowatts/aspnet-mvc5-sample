@@ -18,6 +18,7 @@ namespace aspnet_mvc5_mongodb.Models
         public int Age { get; set; }
 
         [BsonElement("email")]
+        [Required]
         public string Email { get; set; }
 
         [BsonElement("address")]

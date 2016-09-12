@@ -1,12 +1,8 @@
-﻿using aspnet_mvc5_mongodb.Repositories.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using aspnet_mvc5_mongodb.Models;
-using System.Threading.Tasks;
-using MongoDB.Bson;
+﻿using aspnet_mvc5_mongodb.Models;
+using aspnet_mvc5_mongodb.Repositories.Abstractions;
 using MongoDB.Driver;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace aspnet_mvc5_mongodb.Repositories
 {

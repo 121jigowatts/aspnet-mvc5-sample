@@ -1,8 +1,5 @@
 ﻿using aspnet_mvc5_mongodb.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace aspnet_mvc5_mongodb.Repositories.Abstractions
