@@ -87,8 +87,12 @@ namespace aspnet_mvc5_mongodb.Controllers
             {
                 try
                 {
-                    await _repository.UpdateAsync(document);
-                    return RedirectToAction("Index");
+                    if (await _repository.UpdateAsync(document))
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    ViewBag.ErrorMsg = "他のユーザにより更新されています。";
+                    return View(document);
                 }
                 catch (Exception)
                 {

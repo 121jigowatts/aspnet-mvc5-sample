@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace aspnet_mvc5_mongodb.Models
@@ -23,6 +24,12 @@ namespace aspnet_mvc5_mongodb.Models
 
         [BsonElement("address")]
         public string Address { get; set; }
+
+        [BsonElement("revision")]
+        public int Revision { get; set; }
+
+        [BsonElement("last_modified")]
+        public DateTime LastModified { get; set; }
 
     }
 }

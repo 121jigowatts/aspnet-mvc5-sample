@@ -1,6 +1,7 @@
 ﻿using aspnet_mvc5_mongodb.Models;
 using aspnet_mvc5_mongodb.Repositories.Abstractions;
 using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -34,30 +35,43 @@ namespace aspnet_mvc5_mongodb.Repositories
 
         public async Task InsertAsync(User document)
         {
+            document.Revision = 1;
+            document.LastModified = DateTime.Now;
             var collection = GetCollection<User>(Collection);
             await collection.InsertOneAsync(document);
         }
 
-        public async Task UpdateAsync(User document)
+        public async Task<bool> UpdateAsync(User document)
         {
             var collection = GetCollection<User>(Collection);
             //var objId = ObjectId.Parse(document.Id);
             //var filter = Builders<User>.Filter.Eq("_id", objId);
             //var update = Builders<User>.Update
             //    .Set("name", document.Name)
-            //    .Set("correct", document.Age)
-            //    .Set("incorrect_one", document.Email)
-            //    .Set("incorrect_two", document.Address);
+            //    .Set("age", document.Age)
+            //    .Set("email", document.Email)
+            //    .Set("address", document.Address);
 
             //await collection.UpdateOneAsync(filter, update);
+
+            var builder = Builders<User>.Filter;
+            var filter = builder.Eq(d => d.Id, document.Id)
+                & builder.Eq(d => d.Revision, document.Revision);
 
             var update = Builders<User>.Update
                 .Set(d => d.Name, document.Name)
                 .Set(d => d.Age, document.Age)
                 .Set(d => d.Email, document.Email)
-                .Set(d => d.Address, document.Address);
+                .Set(d => d.Address, document.Address)
+                .CurrentDate(d => d.LastModified)
+                .Inc(d => d.Revision, 1);
 
-            await collection.UpdateOneAsync(d => d.Id == document.Id, update);
+            var result = await collection.UpdateOneAsync(filter, update);
+            if (result.IsModifiedCountAvailable && result.ModifiedCount == 1)
+            {
+                return true;
+            }
+            return false;
         }
 
         public async Task DeleteAsync(string id)

@@ -9,7 +9,7 @@ namespace aspnet_mvc5_mongodb.Repositories.Abstractions
         Task<IEnumerable<User>> GetAllAsync();
         Task<User> GetByIdAsync(string id);
         Task InsertAsync(User document);
-        Task UpdateAsync(User document);
+        Task<bool> UpdateAsync(User document);
         Task DeleteAsync(string id);
     }
 }
