@@ -187,10 +187,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IntrinsicsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Api\PeopleController.cs" />
     <Compile Include="Controllers\ToDoController.cs" />
     <Compile Include="Data\AppDbContext.cs" />
+    <Compile Include="Framework\AspNetCacheService.cs" />
+    <Compile Include="Framework\ICacheService.cs" />
     <Compile Include="Framework\ILogger.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -332,6 +335,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Intrinsics\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
