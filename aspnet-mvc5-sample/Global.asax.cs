@@ -1,4 +1,5 @@
 ﻿using aspnet_mvc5_sample.Framework;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,12 @@ namespace aspnet_mvc5_sample
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        private static NLog.Logger logger = LogManager.GetCurrentClassLogger();
+
         // キャッシュラッパーオブジェクトへの内部参照
         private static ICacheService _internalCacheObject;
 
-        public  static void RegisterCacheService(ICacheService cacheService)
+        public static void RegisterCacheService(ICacheService cacheService)
         {
             _internalCacheObject = cacheService;
         }
@@ -29,11 +32,13 @@ namespace aspnet_mvc5_sample
 
         protected void Application_Start()
         {
+            logger.Trace("Application Start");
             // グローバルキャッシュサービスの注入
             RegisterCacheService(new AspNetCacheService());
 
             // アプリケーションスコープのデータをキャッシュ
             CacheService["StartTime"] = DateTime.Now;
+            logger.Trace($"Start Time : {CacheService["StartTime"]}");
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
