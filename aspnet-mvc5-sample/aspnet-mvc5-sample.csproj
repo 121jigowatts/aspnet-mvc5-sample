@@ -190,6 +190,7 @@
     <Compile Include="Controllers\IntrinsicsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Api\PeopleController.cs" />
+    <Compile Include="Controllers\StartController.cs" />
     <Compile Include="Controllers\ToDoController.cs" />
     <Compile Include="Data\AppDbContext.cs" />
     <Compile Include="Framework\AspNetCacheService.cs" />
@@ -336,6 +337,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Intrinsics\" />
+    <Folder Include="Views\Start\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
