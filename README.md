@@ -9,4 +9,5 @@ sample collection
  - Edit
  - Delete
 - Cache Service
+- Logging
 
