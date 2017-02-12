@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "Display";
+}
+
+<h2>@ViewBag.FileName</h2>
+
+<div>
+    @Html.Raw(Html.Encode(ViewBag.Text).Replace("\n","<br>"))
+</div>
