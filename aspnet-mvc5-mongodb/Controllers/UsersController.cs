@@ -1,6 +1,7 @@
 ﻿using aspnet_mvc5_mongodb.Models;
-using aspnet_mvc5_mongodb.Repositories;
-using aspnet_mvc5_mongodb.Repositories.Abstractions;
+using aspnet_mvc5_mongodb.Services;
+using aspnet_mvc5_mongodb.Services.Abstractions;
+using aspnet_mvc5_mongodb.ViewModels;
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -10,20 +11,38 @@ namespace aspnet_mvc5_mongodb.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly IUserRepository _repository;
+        private readonly IUserService _service;
+
+        #region Constructors
         public UsersController()
-            : this(new UserRepository())
+            : this(new UserService())
         {
 
         }
-        public UsersController(IUserRepository repository)
+        public UsersController(IUserService service)
         {
-            this._repository = repository;
+            this._service = service;
         }
+        #endregion
+
 
         public async Task<ActionResult> Index()
         {
-            var model = await _repository.GetAllAsync();
+            var model = await _service.GetAllAsync();
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Search()
+        {
+            var model = new UserSearchViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Search(UserSearchViewModel inputModel)
+        {
+            var model = await _service.SearchAsync(inputModel.userSearchCondition);
             return View(model);
         }
 
@@ -46,7 +65,7 @@ namespace aspnet_mvc5_mongodb.Controllers
             {
                 try
                 {
-                    await _repository.InsertAsync(inputModel);
+                    await _service.InsertAsync(inputModel);
                     return RedirectToAction("Index");
                 }
                 catch (Exception)
@@ -65,7 +84,7 @@ namespace aspnet_mvc5_mongodb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var model = await _repository.GetByIdAsync(id);
+            var model = await _service.GetByIdAsync(id);
             if (model == null)
             {
                 return HttpNotFound();
@@ -87,7 +106,7 @@ namespace aspnet_mvc5_mongodb.Controllers
             {
                 try
                 {
-                    if (await _repository.UpdateAsync(document))
+                    if (await _service.UpdateAsync(document))
                     {
                         return RedirectToAction("Index");
                     }
@@ -111,7 +130,7 @@ namespace aspnet_mvc5_mongodb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var model = await _repository.GetByIdAsync(id);
+            var model = await _service.GetByIdAsync(id);
             if (model == null)
             {
                 return HttpNotFound();
@@ -124,7 +143,7 @@ namespace aspnet_mvc5_mongodb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            await _repository.DeleteAsync(id);
+            await _service.DeleteAsync(id);
             return RedirectToAction("Index");
         }
     }

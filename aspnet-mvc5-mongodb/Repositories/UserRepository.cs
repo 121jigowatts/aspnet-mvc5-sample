@@ -1,8 +1,11 @@
 ﻿using aspnet_mvc5_mongodb.Models;
 using aspnet_mvc5_mongodb.Repositories.Abstractions;
+using aspnet_mvc5_mongodb.ViewModels;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace aspnet_mvc5_mongodb.Repositories
@@ -82,6 +85,40 @@ namespace aspnet_mvc5_mongodb.Repositories
             //await collection.DeleteOneAsync(filter);
 
             await collection.DeleteOneAsync(d => d.Id == id);
+        }
+
+        public async Task<IEnumerable<User>> SearchAsync(UserSearchCondition condition)
+        {
+            var collection = GetCollection<User>(Collection);
+            IMongoQueryable<User> query = collection.AsQueryable<User>();
+            if (condition.userName != null)
+            {
+                query = query.Where(x => x.Name.Contains(condition.userName));
+            }
+
+            if (condition.fromUserAge != null)
+            {
+                var fromUserAge = int.Parse(condition.fromUserAge);
+                query = query.Where(x => x.Age >= fromUserAge);
+            }
+
+            if (condition.toUserAge != null)
+            {
+                var toUserAge = int.Parse(condition.toUserAge);
+                query = query.Where(x => x.Age <= toUserAge);
+            }
+
+            if (condition.userEmail != null)
+            {
+                query = query.Where(x => x.Email.Contains(condition.userEmail));
+            }
+
+            if (condition.userAddress != null)
+            {
+                query = query.Where(x => x.Address.Contains(condition.userAddress));
+            }
+
+            return await query.ToListAsync();
         }
     }
 }
