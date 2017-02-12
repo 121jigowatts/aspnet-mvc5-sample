@@ -8,6 +8,7 @@ sample collection
  - Create
  - Edit
  - Delete
+ - Search
 - Cache Service
 - Logging
 
