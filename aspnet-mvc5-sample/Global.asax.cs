@@ -45,7 +45,15 @@ namespace aspnet_mvc5_sample
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
 
+        protected void Session_Start()
+        {
+            var id = "testId";
+            var role = new RoleManager(id);
+            Session["role"] = role;
+            var menu = role.GetMenu();
+            Session["menu"] = menu;
         }
     }
 }

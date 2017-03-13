@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using aspnet_mvc5_sample.Models
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -23,7 +25,33 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("ホーム", "Index", "Home")</li>
+                    @{ 
+                        var menu = (List< NavigationLink>)Session["menu"];
+
+                        foreach (var item in menu)
+                        {
+                            if (item.ChildMenu == null)
+                            {
+                                <li>@Html.ActionLink(item.LinkText,item.ActionName,item.ControllerName)</li>
+                            }else
+                            {
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                                        @item.CategoryName
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        @foreach (var childItem in item.ChildMenu)
+                                        {
+                                            <li>@Html.ActionLink(childItem.LinkText,childItem.ActionName,childItem.ControllerName)</li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        }
+                    }
+
+                    @*<li>@Html.ActionLink("ホーム", "Index", "Home")</li>
                     <li>@Html.ActionLink("詳細", "About", "Home")</li>
                     <li>@Html.ActionLink("連絡先", "Contact", "Home")</li>
                     <li class="dropdown">
@@ -37,7 +65,7 @@
                             <li role="presentation"><a href="#">リンクのリスト２</a></li>
                             <li role="presentation"><a href="#">リンクのリスト３</a></li>
                         </ul>
-                    </li>
+                    </li>*@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
