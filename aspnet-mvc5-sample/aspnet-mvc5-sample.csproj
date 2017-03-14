@@ -205,6 +205,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\NavigationMenuHelper.cs" />
     <Compile Include="Migrations\201606270340310_InitialCreate.cs" />
     <Compile Include="Migrations\201606270340310_InitialCreate.Designer.cs">
       <DependentUpon>201606270340310_InitialCreate.cs</DependentUpon>
