@@ -190,6 +190,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntrinsicsController.cs" />
     <Compile Include="Controllers\LoggingController.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="Controllers\ToDoController.cs" />
     <Compile Include="Data\AppDbContext.cs" />
     <Compile Include="Framework\AspNetCacheService.cs" />
+    <Compile Include="Framework\CalendarManager.cs" />
     <Compile Include="Framework\ICacheService.cs" />
     <Compile Include="Framework\ILogger.cs" />
     <Compile Include="Framework\RoleManager.cs" />
@@ -212,6 +214,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Calendar.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -352,6 +355,7 @@
     <Content Include="Views\Logging\Index.cshtml" />
     <Content Include="Views\Logging\Display.cshtml" />
     <Content Include="Views\Home\Contact.Mobile.cshtml" />
+    <Content Include="Views\Calendar\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

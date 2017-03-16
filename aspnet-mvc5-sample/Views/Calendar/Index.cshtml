@@ -1,0 +1,34 @@
+﻿@model aspnet_mvc5_sample.Models.Calendar
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<h3>@Model.Today</h3>
+<table class="table">
+    <tr>
+        <th>
+            Day
+        </th>
+        <th>
+            Day of week
+        </th>
+    </tr>
+
+@foreach (var date in Model.CalendarMonth) {
+    <tr>
+        <td>
+            @date.Day
+        </td>
+        <td>
+            @date.DayOfWeek
+        </td>
+    </tr>
+}
+
+</table>

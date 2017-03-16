@@ -101,6 +101,7 @@
     <Compile Include="Controllers\IntrinsicsControllerTests.cs" />
     <Compile Include="Controllers\StartControllerTests.cs" />
     <Compile Include="Data\TestDbAsyncQueryProvider.cs" />
+    <Compile Include="Framework\CalendarManagerTests.cs" />
     <Compile Include="Models\ItemTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ItemRepositoryTests.cs" />
