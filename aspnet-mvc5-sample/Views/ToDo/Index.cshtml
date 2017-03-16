@@ -48,8 +48,13 @@
                 @Html.DisplayFor(modelItem => item.Expiration)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @if (!item.Completed)
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                    <span>|</span>
+                }
+                @Html.ActionLink("Details", "Details", new { id = item.ID })
+                <span>|</span>
                 @Html.ActionLink("Delete", "Delete", new { id = item.ID })
             </td>
         </tr>

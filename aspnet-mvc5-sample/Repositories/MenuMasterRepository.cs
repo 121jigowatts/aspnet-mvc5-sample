@@ -42,6 +42,7 @@ namespace aspnet_mvc5_sample.Repositories
                             Order=3
                         },
                         new NavigationLink {Id=13,ParentId=4,LinkText="LogViewer",ActionName="Index",ControllerName="Logging",Order=4 },
+                        new NavigationLink {Id=14,ParentId=4,LinkText="Todo",ActionName="Index",ControllerName="Todo",Order=5 },
                     }
                     ,Order=4},
             };
