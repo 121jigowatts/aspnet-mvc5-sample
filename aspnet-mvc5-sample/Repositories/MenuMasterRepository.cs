@@ -74,7 +74,6 @@ namespace aspnet_mvc5_sample.Repositories
             linkItem.Id = item.Id;
             linkItem.RoleId = item.RoleId;
             linkItem.ParentId = item.ParentId;
-            linkItem.CategoryName = item.CategoryName;
             linkItem.LinkText = item.LinkText;
             linkItem.ActionName = item.ActionName;
             linkItem.ControllerName = item.ControllerName;
@@ -86,7 +85,7 @@ namespace aspnet_mvc5_sample.Repositories
         {
             foreach (var item in menu)
             {
-                if (item.CategoryName != null && item.ChildMenu == null)
+                if (item.ActionName == null && item.ChildMenu == null)
                 {
                     var childMenu = GetChildMenu(data, item.Id);
                     item.ChildMenu = childMenu;
