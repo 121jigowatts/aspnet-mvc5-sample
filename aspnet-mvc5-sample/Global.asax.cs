@@ -1,7 +1,10 @@
-﻿using aspnet_mvc5_sample.Framework;
+﻿using aspnet_mvc5_sample.Data;
+using aspnet_mvc5_sample.Framework;
+using aspnet_mvc5_sample.Migrations;
 using NLog;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -32,6 +35,7 @@ namespace aspnet_mvc5_sample
 
         protected void Application_Start()
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AppDbContext, Configuration>());
             logger.Trace("Application Start");
             // グローバルキャッシュサービスの注入
             RegisterCacheService(new AspNetCacheService());

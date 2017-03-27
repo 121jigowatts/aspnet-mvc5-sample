@@ -82,13 +82,13 @@ namespace aspnet_mvc5_sample.Repositories
             return linkItem;
         }
 
-        private void SetChildMenu(List<NavigationLink> menu, List<NavigationItem> data)
+        private void SetChildMenu(IEnumerable<NavigationLink> menu, List<NavigationItem> data)
         {
             foreach (var item in menu)
             {
                 if (item.CategoryName != null && item.ChildMenu == null)
                 {
-                    List<NavigationLink> childMenu = GetChildMenu(data, item);
+                    var childMenu = GetChildMenu(data, item.Id);
                     item.ChildMenu = childMenu;
 
                     SetChildMenu(childMenu, data);
@@ -96,9 +96,9 @@ namespace aspnet_mvc5_sample.Repositories
             }
         }
 
-        private static List<NavigationLink> GetChildMenu(List<NavigationItem> data, NavigationLink item)
+        private static IEnumerable<NavigationLink> GetChildMenu(IEnumerable<NavigationItem> data, int id)
         {
-            var child = data.Where(n => item.Id == n.ParentId)
+            var child = data.Where(n => id == n.ParentId)
                 .OrderBy(n => n.Order).ToList();
 
             var childMenu = new List<NavigationLink>();

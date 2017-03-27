@@ -1,5 +1,6 @@
-namespace aspnet_mvc5_sample.Migrations
+﻿namespace aspnet_mvc5_sample.Migrations
 {
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -27,6 +28,25 @@ namespace aspnet_mvc5_sample.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            // Unicode(UTF-8) - コードページ65001で保存
+            context.NavigationItems.AddOrUpdate(
+                p => p.LinkText,
+                new NavigationItem { ParentId = null, RoleId = 0, CategoryName = null, LinkText = "ホーム", ActionName = "Index", ControllerName = "Home", Order = 1 },
+                new NavigationItem { ParentId = null, RoleId = 0, CategoryName = null, LinkText = "詳細", ActionName = "About", ControllerName = "Home", Order = 2 },
+                new NavigationItem { ParentId = null, RoleId = 0, CategoryName = null, LinkText = "連絡先", ActionName = "Contact", ControllerName = "Home", Order = 3 },
+                new NavigationItem { ParentId = null, RoleId = 0, CategoryName = "サンプル", LinkText = "", ActionName = "", ControllerName = "", Order = 4 },
+                new NavigationItem { ParentId = 4, RoleId = 0, CategoryName = null, LinkText = "Upload", ActionName = "Upload", ControllerName = "Home", Order = 1 },
+                new NavigationItem { ParentId = 4, RoleId = 0, CategoryName = null, LinkText = "Autocomplete", ActionName = "Create", ControllerName = "Home", Order = 2 },
+                new NavigationItem { ParentId = 4, RoleId = 0, CategoryName = "Sample", LinkText = "", ActionName = "", ControllerName = "", Order = 3 },
+                new NavigationItem { ParentId = 7, RoleId = 0, CategoryName = null, LinkText = "Sample01", ActionName = "Index", ControllerName = "Home", Order = 1 },
+                new NavigationItem { ParentId = 7, RoleId = 0, CategoryName = null, LinkText = "Sample02", ActionName = "Index", ControllerName = "Home", Order = 2 },
+                new NavigationItem { ParentId = 7, RoleId = 0, CategoryName = "More Options", LinkText = "", ActionName = "", ControllerName = "", Order = 3 },
+                new NavigationItem { ParentId = 10, RoleId = 0, CategoryName = null, LinkText = "Google", ActionName = "Index", ControllerName = "Home", Order = 1 },
+                new NavigationItem { ParentId = 10, RoleId = 0, CategoryName = null, LinkText = "Yahoo", ActionName = "Index", ControllerName = "Home", Order = 2 },
+                new NavigationItem { ParentId = 4, RoleId = 0, CategoryName = null, LinkText = "LogViewer", ActionName = "Index", ControllerName = "Logging", Order = 4 },
+                new NavigationItem { ParentId = 4, RoleId = 0, CategoryName = null, LinkText = "Todo", ActionName = "Index", ControllerName = "Todo", Order = 5 }
+                );
         }
     }
 }
