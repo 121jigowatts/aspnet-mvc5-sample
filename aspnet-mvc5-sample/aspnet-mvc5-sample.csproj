@@ -212,6 +212,10 @@
     <Compile Include="Migrations\201606270340310_InitialCreate.Designer.cs">
       <DependentUpon>201606270340310_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703270208452_AddNavigationItems.cs" />
+    <Compile Include="Migrations\201703270208452_AddNavigationItems.Designer.cs">
+      <DependentUpon>201703270208452_AddNavigationItems.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Calendar.cs" />
@@ -371,6 +375,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201606270340310_InitialCreate.resx">
       <DependentUpon>201606270340310_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703270208452_AddNavigationItems.resx">
+      <DependentUpon>201703270208452_AddNavigationItems.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

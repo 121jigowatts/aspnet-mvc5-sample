@@ -17,4 +17,16 @@ namespace aspnet_mvc5_sample.Models
         public IEnumerable<NavigationLink> ChildMenu { get; set; }
         public int Order { get; set; }
     }
+
+    public class NavigationItem
+    {
+        public int? Id { get; set; }
+        public int? ParentId { get; set; }
+        public int RoleId { get; set; }
+        public string CategoryName { get; set; }
+        public string LinkText { get; set; }
+        public string ActionName { get; set; }
+        public string ControllerName { get; set; }
+        public int Order { get; set; }
+    }
 }

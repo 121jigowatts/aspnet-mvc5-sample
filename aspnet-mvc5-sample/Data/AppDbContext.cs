@@ -17,6 +17,7 @@ namespace aspnet_mvc5_sample.Data
         }
 
         public virtual DbSet<Item> Items { get; set; }
+        public virtual DbSet<NavigationItem> NavigationItems { get; set; }
 
     }
 }
