@@ -35,6 +35,7 @@ namespace aspnet_mvc5_sample.Controllers
         public async Task<ActionResult> Index()
         {
             var model = await _service.GetAllAsync();
+            MvcApplication.CacheService["ToDoList"] = model;
 
             //return View(await db.Items.ToListAsync());
             return View(model);

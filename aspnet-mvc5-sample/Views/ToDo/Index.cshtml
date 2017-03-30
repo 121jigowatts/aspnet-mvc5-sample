@@ -8,8 +8,10 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
+    |
+    @Html.ActionLink("Download PDF", "TodoReport", "Report")
 </p>
-<table class="table">
+<table class="table table-striped table-bordered table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => Model.ToDoList.FirstOrDefault().Title)

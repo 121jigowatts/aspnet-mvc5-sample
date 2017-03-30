@@ -123,6 +123,14 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="TuesPechkin, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TuesPechkin.2.1.1\lib\net20\TuesPechkin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TuesPechkin.Wkhtmltox.AnyCPU, Version=0.12.4.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TuesPechkin.Wkhtmltox.AnyCPU.0.12.4.1\lib\net20\TuesPechkin.Wkhtmltox.AnyCPU.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -196,6 +204,7 @@
     <Compile Include="Controllers\LoggingController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Api\PeopleController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\StartController.cs" />
     <Compile Include="Controllers\ToDoController.cs" />
     <Compile Include="Data\AppDbContext.cs" />
@@ -243,9 +252,11 @@
     <Compile Include="Repositories\MenuMasterRepository.cs" />
     <Compile Include="Services\Abstractions\IHomeService.cs" />
     <Compile Include="Services\Abstractions\IPeopleService.cs" />
+    <Compile Include="Services\Abstractions\IReportService.cs" />
     <Compile Include="Services\Abstractions\IToDoService.cs" />
     <Compile Include="Services\Home\HomeService.cs" />
     <Compile Include="Services\People\PeopleService.cs" />
+    <Compile Include="Services\Report\ReportService.cs" />
     <Compile Include="Services\ToDo\ToDoService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ToDo\ItemViewModel.cs" />
@@ -372,6 +383,8 @@
     <Content Include="Views\Logging\Display.cshtml" />
     <Content Include="Views\Home\Contact.Mobile.cshtml" />
     <Content Include="Views\Calendar\Index.cshtml" />
+    <Content Include="Views\Report\Todo.cshtml" />
+    <Content Include="Views\Shared\_ReportLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

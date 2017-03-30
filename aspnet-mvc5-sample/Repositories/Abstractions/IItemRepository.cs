@@ -9,6 +9,7 @@ namespace aspnet_mvc5_sample.Repositories.Abstractions
 {
     public interface IItemRepository
     {
+        IEnumerable<Item> GetAll();
         Task<IEnumerable<Item>> GetAllAsync();
         Task<Item> GetByIdAsync(int id);
         Task SaveAsync(Item item);

@@ -55,5 +55,10 @@ namespace aspnet_mvc5_sample.Repositories
             _context.Items.Remove(item);
             await _context.SaveChangesAsync();
         }
+
+        public IEnumerable<Item> GetAll()
+        {
+            return _context.Items.ToList();
+        }
     }
 }

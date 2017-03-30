@@ -1,0 +1,58 @@
+﻿@model aspnet_mvc5_sample.ViewModels.ToDo.ToDoListViewModel
+
+@{
+    ViewBag.Title = "Todo";
+    Layout = "~/Views/Shared/_ReportLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Todo</title>
+</head>
+<body>
+    <h1>ToDo List Report</h1>
+
+    <table class="table table-striped table-bordered table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => Model.ToDoList.FirstOrDefault().Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.ToDoList.FirstOrDefault().Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.ToDoList.FirstOrDefault().Deadline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.ToDoList.FirstOrDefault().Completed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.ToDoList.FirstOrDefault().Expiration)
+            </th>
+        </tr>
+        @foreach (var item in Model.ToDoList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Deadline)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Completed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Expiration)
+                </td>
+            </tr>
+        }
+    </table>
+</body>
+</html>
